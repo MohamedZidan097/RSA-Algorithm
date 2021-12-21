@@ -1,23 +1,18 @@
 # RSA Alogrithm 
 # Created by Mohamed Zidan
-# 12/21/2021 
-# Using RSA with 1024-bit primes p and q and a public exponent e = 65537  to encrypt the message m = 466921883457309
+# "Cryptography and Network Security Principles and Practice" as Reference 
+# Author: William Stallings
+# Date: 12/21/2021 
 
 !apt install libmpc-dev
 !pip install gmpy2
 !pip install tinyec
 from fractions import gcd
-from sympy.ntheory.residue_ntheory import primitive_root
-import random
 import sys
 import random
-import timeit
-import gmpy2
 from tinyec import registry
-import secrets
 import time
-import timeit
-import gmpy2
+sys.float_info.max
 
 # Function to Generate Prim number
 def genprimeBits(k):
@@ -39,8 +34,7 @@ def genprimeBits(k):
             break
     return p
 
-
-# Function for Miller Test
+# Function for Miller Test to test if the number prim or not
 def Miller_rabin(n, t):
   # Test if the number is even
     if n % 2 == 0:
@@ -66,7 +60,6 @@ def Miller_rabin(n, t):
         else:
             return False
     return True
-
   
   
 # Function to find multiplicative inverse 
@@ -84,28 +77,25 @@ def inv(a,n):
     else:
       n_+=n
   
-  
-  
-message = 466921883457309
+# Using RSA with 1024-bit primes p and q and a public exponent e = 65537 to encrypt the message m = 466921883457309 
+message = 466921883457309    
 e = 65537
 p=genprimeBits(1024)
-print(f'p={p}')
-
 q=genprimeBits(1024)
-print(f'q={q}')
-
 n=p*q
-print(f'n={n}')
-
 phi=(p-1)*(q-1)
-print(f'φ(n)={phi}')
-
-print(f'Message= {message}')
+# The corrosponding private key for Bob's public key e=65537
+d=inv(e,phi)
+# Alice will encrypt using Bob's Public key
 Cipher=(m**e)%n
 print(f'Ciphertext= {Cipher}')
-
-
+# Alice will send the Ciphertext to Bob
+#---------------------------------------------------------
 # Tradational decryption  and compute the comsuming time 
+# Bob will recieve (Ciphertext)
+# Bob will have (Ciphertext, n, d)
+import timeit
+import gmpy2
 starttime = timeit.default_timer()
 print("The start time is :",starttime)
 m_=pow(Cipher,d,n)
