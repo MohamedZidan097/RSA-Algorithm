@@ -98,3 +98,17 @@ print("The start time is :",starttime)
 m_=pow(Cipher,d,n)
 print("Computational time without CRT :", timeit.default_timer() - starttime)
 print(f'Message= {m_}')
+#--------------------------------------------------------- CRT Decryption---------------------------------------------------------
+# Decryption using chinese remainder theorem and compute the consuming time 
+dp=inv(e,(p-1))
+dq=inv(e,(q-1))
+qinv = gmpy2.invert(q, p)
+# compute computational time 
+starttime = timeit.default_timer()
+print("The start time is :",starttime)
+m1 = pow(Cipher, dp, p)
+m2 = pow(Cipher, dq, q)
+h = (qinv * (m1 - m2)) % p 
+_m = m2 + h * q
+print("Computational time with CRT :", timeit.default_timer() - starttime)
+print(f'Message= {_m}')
