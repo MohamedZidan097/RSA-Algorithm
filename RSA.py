@@ -73,7 +73,7 @@ def inv(a,n):
         return int(d)
     else:
       n_+=n
-  
+#--------------------------------------------------------- Encryption-------------------------------------------------------------  
 # Using RSA with 1024-bit primes p and q and a public exponent e = 65537 to encrypt the message m = 466921883457309 
 message = 466921883457309    
 e = 65537
@@ -87,7 +87,7 @@ d=inv(e,phi)
 Cipher=(m**e)%n
 print(f'Ciphertext= {Cipher}')
 # Alice will send the Ciphertext to Bob
-#---------------------------------------------------------
+#--------------------------------------------------------- Decryption-------------------------------------------------------------
 # Tradational decryption  and compute the comsuming time 
 # Bob will recieve (Ciphertext)
 # Bob will have (Ciphertext, n, d)
