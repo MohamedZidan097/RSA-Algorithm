@@ -63,9 +63,6 @@ def Miller_rabin(n, t):
   
   
 # Function to find multiplicative inverse 
-import random
-import sys
-sys.float_info.max
 def inv(a,n):
   i=0
   n_=n
